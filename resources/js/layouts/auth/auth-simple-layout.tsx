@@ -14,7 +14,7 @@ export default function AuthSimpleLayout({ children, title }: PropsWithChildren<
           <img src="/img/logoAir.png" alt="logo" className="w-[100px] mx-auto" />
           <div className="flex flex-col items-center gap-4">
             <div className="space-y-2 text-center">
-              <h1 className="text-xl font-medium text-black">{title}</h1>
+              <h1 className="text-2xl font-medium text-[#035F79]">{title}</h1>
 
             </div>
           </div>
