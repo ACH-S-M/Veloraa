@@ -31,7 +31,6 @@ export function AppSidebar() {
             <SidebarContent>
                 <NavMain items={mainNavItems} />
             </SidebarContent>
-
         </Sidebar>
     );
 }
