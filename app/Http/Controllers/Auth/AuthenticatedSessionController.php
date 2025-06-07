@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
-
+use App\Http\Controllers\adminController;
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -32,8 +32,13 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+        $user = Auth::user();
+        if($user->role == 'Admin'){
+            return redirect()->route('admin.dashboard');
+        }else {
+            return redirect()->route('home');
+        }
 
-        return redirect()->intended(route('home', absolute: false)); //disini kalo misalkan udah berhasil login bakal ke
     }
 
     /**
