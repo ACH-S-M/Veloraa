@@ -8,11 +8,11 @@ interface AppShellProps {
 }
 
 export function AppShell({ children, variant = 'header' }: AppShellProps) {
-    const isOpen = usePage<SharedData>().props.sidebarOpen;
+    const isOpen = usePage<SharedData>().props.sidebarOpen; // sidebar nya kebuka kalo pas awal dia masuk
 
     if (variant === 'header') {
         return <div className="flex min-h-screen w-full flex-col">{children}</div>;
     }
 
-    return <SidebarProvider defaultOpen={isOpen}>{children}</SidebarProvider>;
+    return <SidebarProvider defaultOpen={isOpen}>{children}</SidebarProvider>; // karena di app ambilnya side bar bukan header jadinya yg kereturn ini 
 }
