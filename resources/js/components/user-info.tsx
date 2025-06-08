@@ -20,7 +20,7 @@ export function UserInfo({
                     </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-medium">Halo Tamu</span>
+                    <span className="truncate font-medium">Tamu</span>
                     {showEmail && <span className="text-muted-foreground truncate text-xs">Not logged in</span>}
                 </div>
             </>
@@ -36,7 +36,7 @@ export function UserInfo({
                 </AvatarFallback>
             </Avatar>
             <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">Halo {user.name}</span>
+                <span className="truncate font-medium">{user.name}</span>
                 {showEmail && <span className="text-muted-foreground truncate text-xs">{user.email}</span>}
             </div>
         </>
