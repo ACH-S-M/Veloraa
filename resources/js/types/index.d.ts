@@ -17,7 +17,7 @@ export interface NavGroup {
 export interface NavItem {
     title: string;
     href: string;
-    icon?: LucideIcon | null;
+    icon?: LucideIcon | React.ComponentType<Any>;
     isActive?: boolean;
 }
 

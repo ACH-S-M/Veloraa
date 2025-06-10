@@ -1,9 +1,9 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
-import { UserInfo } from '@/components/user-info';
-import { UserMenuContent } from '@/components/user-menu-content';
+import { UserInfo } from '@/components/user-info'; // Ini buat ambil info auth
+import { UserMenuContent } from '@/components/user-menu-content'; //ini dropdown kalo diklick isinya apa
 import { useIsMobile } from '@/hooks/use-mobile';
-import { type SharedData } from '@/types';
+import { type SharedData } from '@/types';  // ini ngambil data auth dari interface ts
 import { usePage } from '@inertiajs/react';
 
 export function NavUser() {

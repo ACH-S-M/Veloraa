@@ -9,6 +9,7 @@ export function AppSidebar() {
             title : "Dashboard admin",
             href : "/admin",
         },
+   
     ]
     return (
         <Sidebar collapsible="icon" variant="inset">
