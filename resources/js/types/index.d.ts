@@ -40,3 +40,11 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+interface PropsBarangPopuler{
+    nama_produk:string;
+    harga:number;
+}
+interface TypeBarang{
+    Barang:PropsBarangPopuler[];
+}

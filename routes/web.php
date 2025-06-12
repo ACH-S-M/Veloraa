@@ -6,10 +6,9 @@ use Inertia\Inertia;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\keranjang;
 use App\Http\Controllers\keranjangNotLogin;
+use App\Http\Controllers\barangController;
 
-Route::get('/', function () {
-    return Inertia::render('dashboard');
-})->name('home'); // ini home nyaa
+Route::get('/', [barangController::class,'getBarang']); // ini home nyaa
  Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/admin',[AdminController::class,'index'])->name('admin.dashboard');
  });
