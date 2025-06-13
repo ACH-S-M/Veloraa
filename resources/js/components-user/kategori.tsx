@@ -1,11 +1,54 @@
 import React from "react";
-import { Button } from "@/components/ui/button";
+import { ButtonKategori }  from "@/components/ui/buttonKategori";
+export function Kategori() {
+     const KategoriNav = [
+            "Semua",
+            "Soda",
+            "Minuman Kaleng",
+            "Air Mineral",
+            "Susu"
 
-export function Kategori(){
-    return <div className="ps-8 md:ps-36">
-        <h1 className="text-3xl text-black mb-3 font-bold">Kategori</h1>
-        <div className="kategori flex">
-            <Button className="p-2 bg-yellow-300">Semua</Button>
-        </div>
-    </div>
+    ]
+    return (
+
+        <>
+            <div className="container px-4 md:ps-38 md:pt-2">
+                {/* Judul */}
+                <h1 className="mb-4 text-3xl font-bold text-black">Kategori</h1>
+
+                {/* Filter Button */}
+                <div className="mb-8 flex flex-wrap gap-3">
+                      {KategoriNav.map((item) =>
+                            <ButtonKategori title={item}></ButtonKategori>
+                    )}
+                </div>
+
+                {/* Grid Produk */}
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+                    {/* Card Produk */}
+                    <div className="overflow-hidden rounded-xl bg-gray-100 shadow">
+                        <img src="https://via.placeholder.com/300x300" alt="Produk" className="h-56 w-full object-cover" />
+                        <div className="p-4">
+                            <p className="mb-2 text-sm">Nescafe Ice Black 220ml per karton isi 24pcs</p>
+                            <p className="mb-4 font-semibold text-teal-700">Rp. 157.150</p>
+                            <button className="flex items-center gap-2 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.4 5m1.4-5L6 6m1 7h10m0 0l1.4 5M9 21h6"
+                                    />
+                                </svg>
+                                Beli
+                            </button>
+                        </div>
+                    </div>
+
+
+                    {/* Tambahkan card produk lainnya di sini */}
+                </div>
+            </div>
+        </>
+    );
 }

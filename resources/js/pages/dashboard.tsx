@@ -1,11 +1,10 @@
 
 import { Head } from '@inertiajs/react';
 import Slider from '../components/ui/carousel';
-import {Component} from '@/components/ui/card-ecom'
 import {Navbaruser} from '@/components-user/navbar-user';
 import { Popular } from '@/components-user/Layout-popular';
 import { type TypeBarang} from '@/types';
-
+import { Kategori } from '@/components-user/kategori';
 export default function Dashboard({Barang}:TypeBarang) {
     return (
            <>
@@ -15,9 +14,8 @@ export default function Dashboard({Barang}:TypeBarang) {
                     <h1> Ini user biasa  </h1>
                         <Slider></Slider>
                         <Popular Barang={Barang}></Popular>
-                        <Component></Component>
-
-              </div>
+                        <Kategori></Kategori>
+             </div>
            </>
 
     );
