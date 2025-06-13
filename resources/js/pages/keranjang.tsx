@@ -2,6 +2,8 @@ import { useState } from "react";
 import React from "react";
 import {Navbaruser} from '@/components-user/navbar-user';
 export default function Keranjang(){
+
+
     const [count,counter] = useState(0);
     const harga = 50000;
     const total = harga * count

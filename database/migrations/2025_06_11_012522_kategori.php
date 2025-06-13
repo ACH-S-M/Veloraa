@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-       Schema::create('kategoris', function (Blueprint $table) {
-           $table->id('ID_KATEGORI');
-           $table->string('nama_kategori');
-           $table->string('status');
-
-       });
+        Schema::create('kategori', function (Blueprint $table) {
+            $table->unsignedBigInteger('ID_kategori')->primary()->autoIncrement();
+            $table->string('nama_kategori');
+            $table->string('status');
+        });
     }
 
     /**
