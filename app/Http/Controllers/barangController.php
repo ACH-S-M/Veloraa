@@ -10,9 +10,12 @@ use Inertia\Inertia;
 class barangController extends Controller
 {
    function getBarang(){
-        $barangPopuler = BarangModel::limit(2)->get();
+        $barangPopuler = BarangModel::orderByDesc("barang_terjual")->limit(3)->get();
+
+        $kategori = BarangModel::all();
         return Inertia::render('dashboard',[
-            'Barang' => $barangPopuler
+            'Barang' => $barangPopuler,
+            'IKategori' => $kategori
         ]);
 
    }

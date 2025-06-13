@@ -8,7 +8,7 @@ use App\Http\Controllers\keranjang;
 use App\Http\Controllers\keranjangNotLogin;
 use App\Http\Controllers\barangController;
 
-Route::get('/', [barangController::class,'getBarang']); // ini home nyaa
+Route::get('/', [barangController::class,'getBarang'])->name('home'); // ini home nyaa
  Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/admin',[AdminController::class,'index'])->name('admin.dashboard');
  });

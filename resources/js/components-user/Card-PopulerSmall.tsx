@@ -1,7 +1,7 @@
 import React from "react";
 import { ShoppingCart } from "lucide-react";
-import { type TypeBarang} from '@/types';
-export function Card_PopulerSmall({Barang}:TypeBarang){
+import { type TypeBarangPopuler} from '@/types';
+export function Card_PopulerSmall({Barang}:TypeBarangPopuler){
     return <>
             {Barang.map((item) =>
                     <div className="container-samping w-11/12 flex flex-col md:w-9/12  gap-2 mb-3 ">

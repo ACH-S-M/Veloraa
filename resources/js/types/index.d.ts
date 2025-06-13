@@ -45,6 +45,16 @@ interface PropsBarangPopuler{
     nama_produk:string;
     harga:number;
 }
-interface TypeBarang{
+interface BigPopuler{
+    Barang:PropsBarangPopuler;
+}
+interface TypeBarangPopuler{
     Barang:PropsBarangPopuler[];
+}
+interface KategoriProps{
+    nama_produk:string;
+    harga:number;
+}
+interface TypeBarangKategori{
+    IKategori:KategoriProps[]
 }

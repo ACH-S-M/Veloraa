@@ -1,6 +1,10 @@
 import React from "react";
 import { ButtonKategori }  from "@/components/ui/buttonKategori";
-export function Kategori() {
+import { TypeBarangKategori } from "@/types";
+import { Produk } from "./Card-Produk";
+
+
+export function Kategori({IKategori}:TypeBarangKategori)   {
      const KategoriNav = [
             "Semua",
             "Soda",
@@ -25,28 +29,7 @@ export function Kategori() {
 
                 {/* Grid Produk */}
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
-                    {/* Card Produk */}
-                    <div className="overflow-hidden rounded-xl bg-gray-100 shadow">
-                        <img src="https://via.placeholder.com/300x300" alt="Produk" className="h-56 w-full object-cover" />
-                        <div className="p-4">
-                            <p className="mb-2 text-sm">Nescafe Ice Black 220ml per karton isi 24pcs</p>
-                            <p className="mb-4 font-semibold text-teal-700">Rp. 157.150</p>
-                            <button className="flex items-center gap-2 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.4 5m1.4-5L6 6m1 7h10m0 0l1.4 5M9 21h6"
-                                    />
-                                </svg>
-                                Beli
-                            </button>
-                        </div>
-                    </div>
-
-
-                    {/* Tambahkan card produk lainnya di sini */}
+                    <Produk IKategori={IKategori}></Produk>
                 </div>
             </div>
         </>
