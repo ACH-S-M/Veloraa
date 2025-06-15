@@ -7,6 +7,6 @@ use Inertia\Inertia;
 class AdminController extends Controller
 {
    function index(){
-    return inertia::render('admin'); //dia bakal ngarahin ke admin
+    return inertia::render('admin/admin'); //dia bakal ngarahin ke admin
    }
 }

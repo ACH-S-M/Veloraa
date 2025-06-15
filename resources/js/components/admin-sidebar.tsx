@@ -2,14 +2,22 @@ import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
-
+import { LayoutGrid,ShoppingCart } from 'lucide-react';
 export function AppSidebar() {
     const navItemValue :NavItem[] =[
         {
+
             title : "Dashboard admin",
             href : "/admin",
+            icon:LayoutGrid,
         },
-   
+        {
+
+            title:"Penjualan",
+            href:"/admin/produk",
+            icon:ShoppingCart,
+        },
+
     ]
     return (
         <Sidebar collapsible="icon" variant="inset">

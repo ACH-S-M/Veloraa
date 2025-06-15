@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class ProdukModel extends Model
 {
     protected $table = 'produk';
+    protected $primaryKey = 'ID_Produk';
 }

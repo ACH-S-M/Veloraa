@@ -7,8 +7,8 @@ use App\Models\Users;
 
 class PelangganModel extends Model
 {
-    protected $table = 'pelanggans';
+    protected $table = 'pelanggan';
     public function Users(){
-        return $this->belongsTo(Users::class,'id_user','id_user');
+        return $this->belongsTo(Users::class,'id','id');
     }
 }

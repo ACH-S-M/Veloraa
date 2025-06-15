@@ -6,7 +6,7 @@ export function Component() {
     <Card
       className="w-1/4 "
       imgAlt="Apple Watch Series 7 in colors pink, silver, and black"
-      imgSrc="/img/iphone.png"
+      imgSrc="/img/banner.png"
     >
       <a href="#">
         <h5 className=" font-semibold tracking-tight text-gray-900 dark:text-white">

@@ -1,6 +1,6 @@
 
 import { Head } from '@inertiajs/react';
-import Slider from '../components/ui/carousel';
+import Slider from '../../components/ui/carousel';
 import {Navbaruser} from '@/components-user/navbar-user';
 import { Popular } from '@/components-user/Layout-popular';
 import { type TypeBarangPopuler} from '@/types';

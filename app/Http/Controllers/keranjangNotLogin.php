@@ -8,6 +8,6 @@ use Inertia\Inertia;
 class keranjangNotLogin extends Controller
 {
     public function index(){
-        return Inertia::render('keranjangnotLogin');
+        return Inertia::render('user/keranjangnotLogin');
     }
 }

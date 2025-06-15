@@ -13,7 +13,7 @@ class barangController extends Controller
         $barangPopuler = Produk::orderByDesc("barang_terjual")->limit(3)->get();
 
         $kategori = Produk::all();
-        return Inertia::render('dashboard',[
+        return Inertia::render('user/dashboard',[
             'Barang' => $barangPopuler,
             'IKategori' => $kategori
         ]);

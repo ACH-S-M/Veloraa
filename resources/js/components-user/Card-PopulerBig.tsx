@@ -3,6 +3,7 @@ import { ShoppingCart } from 'lucide-react';
 export function Card_PopulerBig({ Barang }: BigPopuler) {
     return (
         <>
+
                 <div className="w-11/12 overflow-hidden bg-[#f5f5f5] shadow-2xl hover:scale-105">
                     <div className="w-full bg-gradient-to-br from-blue-400 to-blue-600 p-6 text-center">
                         <div className="mx-auto mb-4 flex h-32 w-32 items-center justify-center rounded-full bg-blue-500">

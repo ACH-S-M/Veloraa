@@ -9,7 +9,7 @@ class keranjang extends Controller
 {
    function getKeranjang(){
     $user = Users::with('Pelanggan')->get();
-    return Inertia::render('keranjang',['user' => $user]
+    return Inertia::render('user/keranjang',['user' => $user]
 
 );
    }

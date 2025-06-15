@@ -40,8 +40,9 @@ export interface User {
 }
 
 interface PropsBarangPopuler{
+    ID_Produk:number;
     nama_produk:string;
-    harga:number;
+    harga_produk:number;
 }
 interface BigPopuler{
     Barang:PropsBarangPopuler;
@@ -50,8 +51,9 @@ interface TypeBarangPopuler{
     Barang:PropsBarangPopuler[];
 }
 interface KategoriProps{
+    ID_Produk:number;
     nama_produk:string;
-    harga:number;
+    harga_produk:number;
 }
 interface TypeBarangKategori{
     IKategori:KategoriProps[]

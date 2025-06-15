@@ -16,7 +16,7 @@ export function Card_PopulerSmall({Barang}:TypeBarangPopuler){
                         <div className="p-4">
                             <h3 className="font-semibold text-gray-800 mb-2">{item.nama_produk}</h3>
                             <div className="flex items-center justify-between">
-                                <p className="text-xl font-bold text-gray-800 mb-4">{item.harga}</p>
+                                <p className="text-xl font-bold text-gray-800 mb-4">{item.harga_produk}</p>
                                 <button className="p-3 w-1/5 bg-blue-500 mt-3 text-white px-4 py-2 rounded-md flex gap-1 items-center hover:bg-blue-600 transition-colors">
                                         <ShoppingCart></ShoppingCart>Beli
                                 </button>

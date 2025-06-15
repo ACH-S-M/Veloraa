@@ -11,7 +11,7 @@ export default function AdminNih(){
     return <>
          <AppLayout breadcrumbs={breadcrumbs}>
                     <Head title="Menu" />
-                   <h1> eaa ini admin </h1>
+                    <h1>eakkk ini admin</h1>
                 </AppLayout>
     </>
 }
