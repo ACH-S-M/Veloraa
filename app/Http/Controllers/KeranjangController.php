@@ -15,7 +15,7 @@ class KeranjangController extends Controller
             'produk_id' => 'required|exists:produk,ID_Produk'
         ]);
 
-        $pelanggan_id = Auth::guard('pelanggan')->id();
+        $pelanggan_id = Auth::id();
 
         // Check if product already exists in cart
         $existingCart = Keranjang::where('produk_id', $request->produk_id)
@@ -37,8 +37,7 @@ class KeranjangController extends Controller
 
     public function index()
     {
-        $pelanggan_id = Auth::guard('pelanggan')->id();
-
+        $pelanggan_id = Auth::id(); // default pakai guard 'web
         $cartItems = Keranjang::with('produk')
             ->where('pelanggan_id', $pelanggan_id)
             ->get();
