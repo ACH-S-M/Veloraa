@@ -1,17 +1,26 @@
 import React from "react";
 import { ShoppingCart } from "lucide-react";
-import { type TypeBarangPopuler} from '@/types';
-export function Card_PopulerSmall({Barang}:TypeBarangPopuler){
+import { type PropsProdukPopuler } from '@/types';
+
+interface CardPopulerSmallProps {
+    Produk: PropsProdukPopuler[];
+}
+
+export function Card_PopulerSmall({Produk}: CardPopulerSmallProps) {
     return <>
-            {Barang.map((item) =>
-                    <div className="container-samping w-11/12 flex flex-col md:w-9/12  gap-2 mb-3 ">
+            {Produk.map((item) =>
+                    <div key={item.ID_Produk} className="bg-[#f5f5f5] container-samping w-11/12 flex flex-col md:w-9/12  gap-2 mb-3 shadow-2xl ">
                     <div className="bg-white rounded-lg shadow-md overflow-hidden ">
-                        <div className="bg-orange-500 p-4 text-center">
-                            <div className="flex justify-center space-x-2">
-                                <div className="w-8 h-16 bg-orange-600 rounded"></div>
-                                <div className="w-8 h-16 bg-orange-600 rounded"></div>
-                                <div className="w-8 h-16 bg-orange-600 rounded"></div>
-                            </div>
+                        <div className="w-full h-[230px]">
+                                {item.gambar_produk ? (
+                                    <img
+                                        src={item.gambar_produk.startsWith('img/produk/') ? `/${item.gambar_produk}` : `/img/produk/${item.gambar_produk}`}
+                                        alt={item.nama_produk}
+                                        className="w-full h-full object-cover"
+                                    />
+                                ) : (
+                                    <span className="text-4xl font-bold text-gray-400">No Image</span>
+                                )}
                         </div>
                         <div className="p-4">
                             <h3 className="font-semibold text-gray-800 mb-2">{item.nama_produk}</h3>

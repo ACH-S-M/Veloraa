@@ -12,7 +12,15 @@ export function Produk({ IKategori }: TypeBarangKategori) {
                     href={`/detail/${item.ID_Produk}`}
                     className="block overflow-hidden rounded-xl bg-gray-100 shadow transition-shadow hover:shadow-md" >
                     <div className="overflow-hidden rounded-xl bg-gray-100 shadow">
-                        <img src="https://via.placeholder.com/300x300" alt="Produk" className="h-56 w-full object-cover" />
+                        {item.gambar_produk ? (
+                                <img
+                                    src={item.gambar_produk.startsWith('img/produk/') ? `/${item.gambar_produk}` : `/img/produk/${item.gambar_produk}`}
+                                    alt={item.nama_produk}
+                                    className="w-full max-h-[200px] h-full object-cover"
+                                />
+                            ) : (
+                                <span className="text-4xl font-bold text-gray-400">No Image</span>
+                            )}
                         <div className="p-4">
                             <p className="mb-2 text-xl text-black">{item.nama_produk}</p>
                             <p className="mb-4 font-semibold text-teal-700">{item.harga_produk}</p>

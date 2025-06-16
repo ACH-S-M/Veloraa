@@ -39,22 +39,28 @@ export interface User {
     [key: string]: unknown; // This allows for additional properties...
 }
 
-interface PropsBarangPopuler{
+interface PropsProdukPopuler{
     ID_Produk:number;
     nama_produk:string;
     harga_produk:number;
+    gambar_produk:string;
 }
+
 interface BigPopuler{
-    Barang:PropsBarangPopuler;
+    Produk:PropsProdukPopuler;
 }
-interface TypeBarangPopuler{
-    Barang:PropsBarangPopuler[];
+
+interface TypeProdukPopuler{
+    Produk:PropsProdukPopuler[];
 }
+
 interface KategoriProps{
     ID_Produk:number;
     nama_produk:string;
     harga_produk:number;
+    gambar_produk:string;
 }
+
 interface TypeBarangKategori{
     IKategori:KategoriProps[]
 }

@@ -12,7 +12,11 @@ class detailController extends Controller
         $produk = Produk::findOrFail($ID_Produk);
         return Inertia::render('user/detailProduk',[
             'nama_produk' => $produk->nama_produk,
-            'harga_produk' => $produk->harga_produk
+            'harga_produk' => $produk->harga_produk,
+            'gambar_produk' => $produk->gambar_produk,
+            'deskripsi_produk' => $produk->deskripsi_produk,
+            'stok' => $produk->stok,
+            'barang_terjual' => $produk->barang_terjual,
         ]);
     }
 }
