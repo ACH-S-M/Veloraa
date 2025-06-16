@@ -11,6 +11,7 @@ class detailController extends Controller
     function index($ID_Produk){
         $produk = Produk::findOrFail($ID_Produk);
         return Inertia::render('user/detailProduk',[
+            "ID_Produk" => $produk->ID_Produk,
             'nama_produk' => $produk->nama_produk,
             'harga_produk' => $produk->harga_produk,
             'gambar_produk' => $produk->gambar_produk,

@@ -14,11 +14,10 @@ return new class extends Migration
 
         Schema::create('pelanggan', function (Blueprint $table) {
             $table->id();
-            $table->string('kota');
-            $table->string('provinsi');   //ini kesambung one to one ke users
-            $table->string('kecamatan');
-            $table->string('kelurahan');
-            $table->string('no_hp');
+            $table->string('alamat');
+            $table->string('no_telp');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
             $table->foreign('id')->references('id')->on('users')->onDelete('cascade');
         });
     }

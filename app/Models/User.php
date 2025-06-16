@@ -45,4 +45,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the pelanggan associated with the user.
+     */
+    public function pelanggan()
+    {
+        return $this->hasOne(Pelanggan::class,'id','id');
+    }
 }

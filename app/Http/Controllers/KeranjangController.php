@@ -9,30 +9,36 @@ use Inertia\Inertia;
 
 class KeranjangController extends Controller
 {
-    public function addToCart(Request $request)
+    public function addToCart($id)
     {
-        $request->validate([
-            'produk_id' => 'required|exists:produk,ID_Produk'
-        ]);
+        try {
+            $pelanggan_id = Auth::id();
+            // Check if product already exists in cart
+            $existingCart = Keranjang::where('produk_id', $id)
+                ->where('pelanggan_id', $pelanggan_id)
+                ->first();
 
-        $pelanggan_id = Auth::id();
+            if ($existingCart) {
+                return response()->json([
+                    'message' => 'Produk sudah ada di keranjang'
+                ], 422);
+            }
 
-        // Check if product already exists in cart
-        $existingCart = Keranjang::where('produk_id', $request->produk_id)
-            ->where('pelanggan_id', $pelanggan_id)
-            ->first();
+            // Add to cart
+            Keranjang::create([
+                'produk_id' => $id,
+                'pelanggan_id' => $pelanggan_id
+            ]);
 
-        if ($existingCart) {
-            return back()->with('error', 'Produk sudah ada di keranjang');
+            return response()->json([
+                'message' => 'Produk berhasil ditambahkan ke keranjang'
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 500);
         }
-
-        // Add to cart
-        Keranjang::create([
-            'produk_id' => $request->produk_id,
-            'pelanggan_id' => $pelanggan_id
-        ]);
-
-        return back()->with('success', 'Produk berhasil ditambahkan ke keranjang');
     }
 
     public function index()
@@ -49,12 +55,20 @@ class KeranjangController extends Controller
 
     public function removeFromCart($produk_id)
     {
-        $pelanggan_id = Auth::guard('pelanggan')->id();
+        try {
+            $pelanggan_id = Auth::guard('pelanggan')->id();
 
-        Keranjang::where('produk_id', $produk_id)
-            ->where('pelanggan_id', $pelanggan_id)
-            ->delete();
+            Keranjang::where('produk_id', $produk_id)
+                ->where('pelanggan_id', $pelanggan_id)
+                ->delete();
 
-        return back()->with('success', 'Produk berhasil dihapus dari keranjang');
+            return response()->json([
+                'message' => 'Produk berhasil dihapus dari keranjang'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Terjadi kesalahan saat menghapus produk dari keranjang'
+            ], 500);
+        }
     }
 }

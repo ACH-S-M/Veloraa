@@ -13,18 +13,22 @@ type RegisterForm = {
     email: string;
     password: string;
     password_confirmation: string;
-}; // Ini Tipe buat Registernya nanti ya
+    alamat: string;
+    no_telp: string;
+};
 
 export default function Register() {
-    const { data, setData, post, processing, errors, reset } = useForm<Required<RegisterForm>>({ //dia make tipe Register
+    const { data, setData, post, processing, errors, reset } = useForm<Required<RegisterForm>>({
         name: '',
         email: '',
         password: '',
-        password_confirmation: '',  //awalnya kosong karna kalo diisi bakal jadi kaya placeholder
+        password_confirmation: '',
+        alamat: '',
+        no_telp: '',
     });
 
     const submit: FormEventHandler = (e) => {
-        e.preventDefault(); //biar ga ngrarah kke link lain atau kepage lain make e.preventdefault jadinya tetep aja kalo misalkan udah diklick tetep dipage ini
+        e.preventDefault();
         post(route('register'), {
             onFinish: () => reset('password', 'password_confirmation'),
         });
@@ -33,7 +37,7 @@ export default function Register() {
     return (
         <AuthLayout title="Sign Up">
             <Head title="Register" />
-            <form className="flex flex-col  pt-4" onSubmit={submit}>
+            <form className="flex flex-col pt-4" onSubmit={submit}>
                 <div className="grid gap-6">
                     <div className="grid justify-center">
                         <Input
@@ -68,12 +72,42 @@ export default function Register() {
                         <InputError message={errors.email} />
                     </div>
 
-                    <div className="grid justify-center" >
+                    <div className="grid justify-center">
+                        <Input
+                            id="alamat"
+                            type="text"
+                            required
+                            tabIndex={3}
+                            value={data.alamat}
+                            onChange={(e) => setData('alamat', e.target.value)}
+                            disabled={processing}
+                            placeholder="Alamat"
+                            className='bg-[#035F79] text-white placeholder-white md:w-[260px]'
+                        />
+                        <InputError message={errors.alamat} />
+                    </div>
+
+                    <div className="grid justify-center">
+                        <Input
+                            id="no_telp"
+                            type="text"
+                            required
+                            tabIndex={4}
+                            value={data.no_telp}
+                            onChange={(e) => setData('no_telp', e.target.value)}
+                            disabled={processing}
+                            placeholder="Nomor Telepon"
+                            className='bg-[#035F79] text-white placeholder-white md:w-[260px]'
+                        />
+                        <InputError message={errors.no_telp} />
+                    </div>
+
+                    <div className="grid justify-center">
                         <Input
                             id="password"
                             type="password"
                             required
-                            tabIndex={3}
+                            tabIndex={5}
                             autoComplete="new-password"
                             value={data.password}
                             onChange={(e) => setData('password', e.target.value)}
@@ -89,7 +123,7 @@ export default function Register() {
                             id="password_confirmation"
                             type="password"
                             required
-                            tabIndex={4}
+                            tabIndex={6}
                             autoComplete="new-password"
                             value={data.password_confirmation}
                             onChange={(e) => setData('password_confirmation', e.target.value)}
@@ -100,7 +134,7 @@ export default function Register() {
                         <InputError message={errors.password_confirmation} />
                     </div>
 
-                    <Button type="submit" className="mt-2 w-1/2 flex mx-auto bg-gray-800 text-white mb-4" tabIndex={5} disabled={processing}>
+                    <Button type="submit" className="mt-2 w-1/2 flex mx-auto bg-gray-800 text-white mb-4" tabIndex={7} disabled={processing}>
                         {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
                         Create account
                     </Button>
@@ -108,7 +142,7 @@ export default function Register() {
 
                 <div className="text-black text-center text-sm">
                     Already have an account?{' '}
-                    <TextLink href={route('login')} tabIndex={6}>
+                    <TextLink href={route('login')} tabIndex={8}>
                         Log in
                     </TextLink>
                 </div>
