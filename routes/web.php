@@ -5,7 +5,7 @@ use App\Http\Controllers\admin\tambahProduk;
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\keranjang;
+use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\keranjangNotLogin;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\detailController;
@@ -19,7 +19,8 @@ Route::get('/', [ProdukController::class,'getBarang'])->name('home'); // ini hom
  });
 
 Route::middleware(['keranjang'])->group(function(){
-    Route::get('/keranjang',[keranjang::class,'getKeranjang'])->Name('keranjang');
+    Route::get('/keranjang',[KeranjangController::class,'Index'])->Name('keranjang');
+
 });
 Route::get('/detail/{id}',[detailController::class,'index']);
 Route::get('/keranjang-guest',[keranjangNotLogin::class,'index'])->name('keranjangNotlogin');

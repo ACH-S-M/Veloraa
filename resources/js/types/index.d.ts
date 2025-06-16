@@ -64,3 +64,14 @@ interface KategoriProps{
 interface TypeBarangKategori{
     IKategori:KategoriProps[]
 }
+interface Produk{
+    ID_Produk:number;
+    nama_produk:string;
+    harga_produk:number;
+    stok:number;
+    deskripsi_produk:string;
+    barang_terjual:number;
+}
+interface ProdukProps{
+    Produk:Produk[];
+}

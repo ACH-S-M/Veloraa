@@ -2,8 +2,8 @@ import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout-admin';
 import { Head, useForm } from '@inertiajs/react';
 import { useState, FormEvent, ChangeEvent } from 'react';
-
-export default function TambahBarang() {
+import { ProdukProps} from '@/types';
+export default function TambahBarang({ Produk} : ProdukProps) {
     const [showModal, setShowModal] = useState(false);
 
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -145,29 +145,28 @@ export default function TambahBarang() {
                 {/* Tabel produk */}
                 <table className="w-full overflow-hidden rounded-xl border border-gray-200">
                     <thead>
-                        <tr className="bg-[#5A94C1] text-blue-400">
+                        <tr className="bg-[#5A94C1] text-white">
                             <th className="px-4 py-4 text-left font-semibold">ID Produk</th>
-                            <th className="px-4 py-4 text-left font-semibold">ID Kategori</th>
                             <th className="px-4 py-4 text-left font-semibold">Nama Produk</th>
                             <th className="px-4 py-4 text-left font-semibold">Harga Produk</th>
                             <th className="px-4 py-4 text-left font-semibold">Stok</th>
                             <th className="px-4 py-4 text-left font-semibold">Deskripsi</th>
                             <th className="px-4 py-4 text-left font-semibold">Jumlah Terjual</th>
-                            <th className="px-4 py-4 text-left font-semibold">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody className="bg-amber-50 text-gray-800">
-                        <tr className="border-b border-gray-100 transition-colors hover:bg-[#E5F1FA]">
-                            <td className="px-4 py-4 font-medium"></td>
-                            <td className="px-4 py-4"></td>
-                            <td className="px-4 py-4"></td>
-                            <td className="px-4 py-4 font-semibold text-green-600"></td>
-                            <td className="px-4 py-4"></td>
-                            <td className="px-4 py-4"></td>
-                            <td className="px-4 py-4"></td>
-                            <td className="px-4 py-4"></td>
-                        </tr>
-                    </tbody>
+                  {Produk.map((item) => (
+                          <tbody className="bg-amber-50 text-gray-800">
+                          <tr className="border-b border-gray-100 transition-colors hover:bg-[#E5F1FA]">
+                              <td className="px-4 py-4 font-medium text-black">{item.ID_Produk}</td>
+                              <td className="px-4 py-4 text-black">{item.nama_produk}</td>
+                              <td className="px-4 py-4">{item.harga_produk}</td>
+                              <td className="px-4 py-4">{item.stok}</td>
+                              <td className="px-4 py-4">{item.deskripsi_produk}</td>
+                              <td className="px-4 py-4">{item.barang_terjual}</td>
+
+                          </tr>
+                      </tbody>
+                  ))}
                 </table>
             </div>
         </AppLayout>

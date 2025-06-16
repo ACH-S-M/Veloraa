@@ -47,4 +47,5 @@ class ProdukController extends Controller
 
         return redirect()->back()->with('success', 'Produk berhasil ditambahkan!');
     }
+
 }
