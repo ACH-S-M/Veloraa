@@ -1,38 +1,43 @@
-import React from "react";
-import { ShoppingCart } from "lucide-react";
-import { type PropsProdukPopuler } from '@/types';
+import { type TypeProdukPopuler } from '@/types';
+import { Link } from '@inertiajs/react';
+import { ShoppingCart } from 'lucide-react';
 
-interface CardPopulerSmallProps {
-    Produk: PropsProdukPopuler[];
-}
 
-export function Card_PopulerSmall({Produk}: CardPopulerSmallProps) {
-    return <>
-            {Produk.map((item) =>
-                    <div key={item.ID_Produk} className="bg-[#f5f5f5] container-samping w-11/12 flex flex-col md:w-9/12  gap-2 mb-3 shadow-2xl ">
-                    <div className="bg-white rounded-lg shadow-md overflow-hidden ">
-                        <div className="w-full h-[230px]">
+export function Card_PopulerSmall({ Produk }: TypeProdukPopuler) {
+    return (
+        <>
+            {Produk.map((item) => (
+                <Link href={`/detail/${item.ID_Produk}`}>
+                    <div key={item.ID_Produk} className="container-samping mb-3 flex w-11/12 flex-col gap-2 bg-[#f5f5f5] shadow-2xl md:w-9/12">
+                        <div className="overflow-hidden rounded-lg bg-white shadow-md">
+                            <div className="h-[230px] w-full">
                                 {item.gambar_produk ? (
                                     <img
-                                        src={item.gambar_produk.startsWith('img/produk/') ? `/${item.gambar_produk}` : `/img/produk/${item.gambar_produk}`}
+                                        src={
+                                            item.gambar_produk.startsWith('img/produk/')
+                                                ? `/${item.gambar_produk}`
+                                                : `/img/produk/${item.gambar_produk}`
+                                        }
                                         alt={item.nama_produk}
-                                        className="w-full h-full object-cover"
+                                        className="h-full w-full object-cover"
                                     />
                                 ) : (
                                     <span className="text-4xl font-bold text-gray-400">No Image</span>
                                 )}
-                        </div>
-                        <div className="p-4">
-                            <h3 className="font-semibold text-gray-800 mb-2">{item.nama_produk}</h3>
-                            <div className="flex items-center justify-between">
-                                <p className="text-xl font-bold text-gray-800 mb-4">{item.harga_produk}</p>
-                                <button className="p-3 w-1/5 bg-blue-500 mt-3 text-white px-4 py-2 rounded-md flex gap-1 items-center hover:bg-blue-600 transition-colors">
+                            </div>
+                            <div className="p-4">
+                                <h3 className="mb-2 font-semibold text-gray-800">{item.nama_produk}</h3>
+                                <div className="flex items-center justify-between">
+                                    <p className="mb-4 text-xl font-bold text-gray-800">{item.harga_produk}</p>
+                                    <button className="mt-3 flex w-1/5 items-center gap-1 rounded-md bg-blue-500 p-3 px-4 py-2 text-white transition-colors hover:bg-blue-600">
                                         <ShoppingCart></ShoppingCart>Beli
-                                </button>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-            </div>
-            )}
-    </>
+                </Link>
+            ))}
+        </>
+    );
 }

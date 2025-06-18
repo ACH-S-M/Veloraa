@@ -21,6 +21,7 @@ export interface NavItem {
     isActive?: boolean;
 }
 
+
 export interface SharedData {
     name: string;
     quote: { message: string; author: string };
@@ -59,6 +60,7 @@ interface KategoriProps{
     nama_produk:string;
     harga_produk:number;
     gambar_produk:string;
+    deskripsi_produk:string;
 }
 
 interface TypeBarangKategori{
@@ -71,7 +73,20 @@ interface Produk{
     stok:number;
     deskripsi_produk:string;
     barang_terjual:number;
+    gambar_produk:string;
 }
 interface ProdukProps{
     Produk:Produk[];
 }
+interface PageProps {
+    auth: {
+      user: {
+        id: number;
+        name: string;
+        email: string;
+      } | null;
+    };
+    Produk:Produk[];
+    [key: string]: unknown;
+
+  }

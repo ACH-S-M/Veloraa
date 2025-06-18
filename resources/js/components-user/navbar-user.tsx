@@ -3,6 +3,8 @@ import { NavBar } from "./navbar";
 import { Navlogo } from "./nav-logo";
 import { Navaccount } from "./nav-account";
 import { useEffect, useState } from "react";
+import { MobileSidebar } from "./mobile-sidebar";
+
 export function Navbaruser(){
     const [isMobile, setIsMobile] = useState(false);
 
@@ -17,12 +19,12 @@ export function Navbaruser(){
         return () => window.removeEventListener("resize", handleResize); // cleanup
       }, []);
     return <div className={` ${!isMobile ? "flex w-full  bg-blue-400 p-3 justify-between fixed z-50 items-center"
-     : "flex justify-start bg-blue-400  p-3 "} `}>
+     : "flex justify-between bg-blue-400  p-3 fixed z-50 w-full" } `}>
         <Navlogo></Navlogo>
         <div className={` ${isMobile ? "hidden" : "w-1/2 flex  items-center justify-end"} p-3.5`}>
-        <NavBar></NavBar>
-        <Navaccount></Navaccount>
+          <NavBar></NavBar>
+          <Navaccount></Navaccount>
         </div>
-
+        {isMobile && <MobileSidebar />}
     </div>
 }

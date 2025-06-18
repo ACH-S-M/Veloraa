@@ -12,12 +12,6 @@ class KeranjangController extends Controller
     public function addToCart($id)
     {
         try {
-            if (!Auth::check()) {
-                return response()->json([
-                    'message' => 'Silakan login terlebih dahulu'
-                ], 401);
-            }
-
             $pelanggan_id = Auth::id();
 
             // Check if product already exists in cart
@@ -36,16 +30,17 @@ class KeranjangController extends Controller
                 'produk_id' => $id,
                 'pelanggan_id' => $pelanggan_id
             ]);
+            // if (!Auth::check()) {
+            //     return response()->json([
+            //         'message' => 'Silakan login terlebih dahulu'
+            //     ], 401);
+            // }else {
+            //     return response()->json([
+            //         'message' => 'Produk berhasil ditambahkan ke keranjang'
+            //     ]);
+            // }
 
-            if(Auth::check() && Auth::user()){
-                return response()->json([
-                    'message' => 'Produk berhasil ditambahkan ke keranjang'
-                ]);
-            } else {
-                return response()->json([
-                    'message' => 'Login terlebih dahulu'
-                ]);
-            }
+
 
         } catch (\Exception $e) {
             return response()->json([

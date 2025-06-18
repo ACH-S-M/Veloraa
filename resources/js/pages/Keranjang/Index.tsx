@@ -57,7 +57,7 @@ export default function Index({ cartItems }: Props) {
                     </div>
                 ) : (
                     <>
-                        <div className="w-full space-y-3 lg:w-1/2 md:pt-36">
+                        <div className="w-full space-y-3 lg:w-1/2 pt-16 md:pt-36">
                             <h1 className="mb-3 text-2xl font-bold text-black lg:text-3xl">Keranjang Belanja</h1>
                             {cartItems.map((item) => (
                                 <div key={item.produk_id} className="flex h-auto flex-col items-center border-2 p-2 sm:flex-row sm:h-40">

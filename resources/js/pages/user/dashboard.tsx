@@ -13,8 +13,7 @@ export default function Dashboard({Produk, IKategori} :DashboardProps) {
            <>
              <Head title="Menu" />
              <Navbaruser></Navbaruser>
-              <div className="main-content md:pt-24 bg-white">
-                    <h1> Ini user biasa  </h1>
+              <div className="main-content pt-24 md:pt-36 bg-white">
                         <Slider></Slider>
                         <Popular Produk={Produk}></Popular>
                         <Kategori IKategori={IKategori}></Kategori>
