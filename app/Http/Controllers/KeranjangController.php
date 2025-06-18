@@ -12,7 +12,14 @@ class KeranjangController extends Controller
     public function addToCart($id)
     {
         try {
+            if (!Auth::check()) {
+                return response()->json([
+                    'message' => 'Silakan login terlebih dahulu'
+                ], 401);
+            }
+
             $pelanggan_id = Auth::id();
+
             // Check if product already exists in cart
             $existingCart = Keranjang::where('produk_id', $id)
                 ->where('pelanggan_id', $pelanggan_id)
@@ -25,14 +32,20 @@ class KeranjangController extends Controller
             }
 
             // Add to cart
-            Keranjang::create([
+            $cart = Keranjang::create([
                 'produk_id' => $id,
                 'pelanggan_id' => $pelanggan_id
             ]);
 
-            return response()->json([
-                'message' => 'Produk berhasil ditambahkan ke keranjang'
-            ]);
+            if(Auth::check() && Auth::user()){
+                return response()->json([
+                    'message' => 'Produk berhasil ditambahkan ke keranjang'
+                ]);
+            } else {
+                return response()->json([
+                    'message' => 'Login terlebih dahulu'
+                ]);
+            }
 
         } catch (\Exception $e) {
             return response()->json([
@@ -43,7 +56,11 @@ class KeranjangController extends Controller
 
     public function index()
     {
-        $pelanggan_id = Auth::id(); // default pakai guard 'web
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        $pelanggan_id = Auth::id();
         $cartItems = Keranjang::with('produk')
             ->where('pelanggan_id', $pelanggan_id)
             ->get();
@@ -56,7 +73,13 @@ class KeranjangController extends Controller
     public function removeFromCart($produk_id)
     {
         try {
-            $pelanggan_id = Auth::guard('pelanggan')->id();
+            if (!Auth::check()) {
+                return response()->json([
+                    'message' => 'Silakan login terlebih dahulu'
+                ], 401);
+            }
+
+            $pelanggan_id = Auth::id();
 
             Keranjang::where('produk_id', $produk_id)
                 ->where('pelanggan_id', $pelanggan_id)

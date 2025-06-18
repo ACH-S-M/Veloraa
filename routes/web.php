@@ -18,7 +18,7 @@ Route::get('/', [ProdukController::class,'getBarang'])->name('home'); // ini hom
     Route::post('admin/produk', [ProdukController::class, 'store'])->name('produk.store');
  });
 
-Route::middleware(['keranjang'])->group(function(){
+Route::middleware(['keranjang','auth'])->group(function(){
     Route::get('/keranjang',[KeranjangController::class,'Index'])->Name('keranjang');
     Route::post('/keranjang/add/{id}', [KeranjangController::class, 'addToCart'])->name('keranjang.add');
     Route::delete('/keranjang/{produk_id}', [KeranjangController::class, 'removeFromCart'])->name('keranjang.remove');

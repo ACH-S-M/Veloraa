@@ -43,16 +43,15 @@ export default function DetailProduk({
                 {/* Detail Produk */}
                 <div className="grid grid-cols-1 gap-4 pb-10 md:grid-cols-2 ">
                     {/* Gambar Produk */}
-                    <img src={gambar_produk.startsWith('img/produk/') ? `/${gambar_produk}` : `/img/produk/${gambar_produk}`} alt={nama_produk} />
+                    <img src={gambar_produk.startsWith('img/produk/') ? `/${gambar_produk}` : `/img/produk/${gambar_produk}`} alt={nama_produk} className='w-[500px] p-2.5' />
 
                     {/* Info Produk */}
                     <div className='border-l-2 w-full p-4'>
                         <h1 className="text-2xl font-semibold text-gray-800 md:text-3xl">{nama_produk}</h1>
                         <p className="mt-2 text-2xl font-bold text-black">Rp {harga_produk.toLocaleString('id-ID')}</p>
-                        <p className="mt-2 text-sm text-gray-500">Kategori: Minuman Kaleng</p>
+                        <p className="mt-2 text-sm text-gray-500">Kategori: Minuman Botol</p>
 
                         <div className="mt-6">
-                        <Button className='bg-amber-300 p-3.5' onClick={()=> alert(ID_Produk)}>Hallo tes</Button>
                             <h2 className="mb-1 font-semibold text-blue-600">Deskripsi Produk</h2>
                             <p className="text-gray-700">{deskripsi_produk}</p>
                         </div>

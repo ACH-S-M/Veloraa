@@ -9,12 +9,12 @@ class Keranjang extends Model
 {
     protected $table = 'keranjang';
     public $timestamps = false;
-    protected $primaryKey = ['produk_id', 'id'];
-    public $incrementing = false;
+    protected $primaryKey = 'id';
+    public $incrementing = true;
 
     protected $fillable = [
         'produk_id',
-        'id'
+        'pelanggan_id'
     ];
 
     public function produk()
