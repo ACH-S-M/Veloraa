@@ -1,7 +1,7 @@
-import { Button } from '@/Components/ui/button';
 import { Navbaruser } from '@/components-user/navbar-user';
 import { PageProps } from '@/types';
 import { Head, router } from '@inertiajs/react';
+import axios from 'axios';
 import { useState } from 'react';
 
 interface Produk {
@@ -15,6 +15,7 @@ interface Produk {
 interface CartItem {
     produk_id: number;
     pelanggan_id: number;
+    quantity: number;
     produk: Produk;
 }
 
@@ -23,20 +24,40 @@ interface Props extends PageProps {
 }
 
 export default function Index({ cartItems }: Props) {
-    const [quantities, setQuantities] = useState<Record<number, number>>(() => {
-        // Initialize quantities for each product to 1
+    const [quantities, setQuantities] = useState<Record<number, number>>(() => { //constanta quantiti adalah state dengan generic class number number
+       //inisiasi jumlah kuantity awal (1)
         const initialQuantities: Record<number, number> = {};
         cartItems.forEach((item) => {
-            initialQuantities[item.produk_id] = 1;
+            initialQuantities[item.produk_id] = item.quantity; //ini state item.produk_id dari interface
         });
-        return initialQuantities;
+        return initialQuantities; // balikin State total_produk secara live ke mysql > keranjang.quantity
     });
 
-    const handleQuantityChange = (produkId: number, change: number) => {
-        setQuantities((prev) => ({
-            ...prev,
-            [produkId]: Math.max(1, (prev[produkId] || 1) + change),
-        }));
+    const handleQuantityChange = async (produkId: number, change: number) => {
+        const newQuantity = Math.max(1, (quantities[produkId] || 1) + change);
+            //Fetch data dari Controller keranjang.quantity
+        try {
+            const response = await axios.patch(route('keranjang.updateQuantity', produkId), { //sett url nya ke rute controller
+                quantity: newQuantity
+            });
+
+            const { data } = response;
+
+            if (response.status === 200) {
+                setQuantities(prev => ({
+                    ...prev,
+                    [produkId]: data.quantity
+                }));
+            } else {
+                alert(data.message);
+            }
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                alert(error.response?.data?.message || 'Terjadi kesalahan saat mengupdate jumlah produk');
+            } else {
+                alert('Terjadi kesalahan saat mengupdate jumlah produk');
+            }
+        }
     };
 
     const handleRemoveFromCart = (produkId: number) => {
@@ -118,8 +139,7 @@ export default function Index({ cartItems }: Props) {
                                         })
                                         .replace('Rp', '')
                                         .trim()}
-
-                                         </span>
+                                    </span>
                                 </div>
 
                                 <div className="mb-6 flex justify-between text-black">
@@ -141,7 +161,8 @@ export default function Index({ cartItems }: Props) {
                                 </div>
 
                                 <div className="flex justify-end">
-                                    <button className="w-full rounded-full bg-teal-800 px-5 py-2 font-semibold text-white transition duration-200 hover:bg-teal-700 sm:w-auto" onClick={() => router.visit(route('checkout'))}>
+                                    <button className="w-full rounded-full bg-teal-800 px-5 py-2 font-semibold text-white transition duration-200 hover:bg-teal-700 sm:w-auto"
+                                     onClick={() => router.visit(route('checkout'))}>
                                         Bayar Sekarang
                                     </button>
                                 </div>
