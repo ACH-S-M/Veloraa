@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('kota')->after('alamat_pengiriman');
             $table->string('kode_pos')->after('kota');
             $table->string('nomor_telepon')->after('kode_pos');
+            $table->timestamps();
 
             // Rename Id_user to pelanggan_id for consistency
             $table->renameColumn('Id_user', 'pelanggan_id');

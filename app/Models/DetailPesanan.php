@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class DetailPesanan extends Model
 {
     protected $table = 'detail_pesanan';
+    public $timestamps = false;
+
     protected $fillable = [
         'pesanan_id',
         'produk_id',
@@ -16,7 +18,7 @@ class DetailPesanan extends Model
 
     public function pesanan()
     {
-        return $this->belongsTo(Pesanan::class, 'No_pesanan');
+        return $this->belongsTo(Pesanan::class, 'pesanan_id', 'No_pesanan');
     }
 
     public function produk()

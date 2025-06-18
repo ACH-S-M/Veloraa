@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Pesanan extends Model
 {
     protected $table = 'pesanan';
-    protected $primaryKey ='No_pesanan';
+    protected $primaryKey = 'No_pesanan';
+    public $timestamps = false;
+
     protected $fillable = [
         'pelanggan_id',
         'total_harga',
@@ -25,6 +27,6 @@ class Pesanan extends Model
 
     public function detailPesanan()
     {
-        return $this->hasMany(DetailPesanan::class, 'pesanan_id');
+        return $this->hasMany(DetailPesanan::class, 'pesanan_id', 'No_pesanan');
     }
 }

@@ -11,7 +11,27 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::table('detail_pesanan', function (Blueprint $table) {
+            // Add new columns
+            $table->decimal('harga', 10, 2)->after('total_barang');
+            $table->timestamps();
 
+            // Rename columns
+            $table->renameColumn('total_barang', 'jumlah');
+            $table->renameColumn('No_pesanan', 'pesanan_id');
+            $table->renameColumn('ID_produk', 'produk_id');
+
+            // Drop and recreate foreign keys with new column names
+            $table->dropForeign(['No_pesanan']);
+            $table->dropForeign(['ID_produk']);
+
+            $table->foreign('pesanan_id')->references('No_pesanan')->on('pesanan')->onDelete('cascade');
+            $table->foreign('produk_id')->references('ID_Produk')->on('produk')->onDelete('cascade');
+
+            // Drop and recreate primary key with new column names
+            $table->dropPrimary();
+            $table->primary(['pesanan_id', 'produk_id']);
+        });
     }
 
     /**

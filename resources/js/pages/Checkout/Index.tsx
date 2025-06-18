@@ -1,8 +1,7 @@
 import { PageProps } from '@/types';
-import { Head } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import { Navbaruser } from '@/components-user/navbar-user';
 import { useState } from 'react';
-import { router } from '@inertiajs/react';
 
 interface Produk {
     ID_Produk: number;
@@ -15,16 +14,15 @@ interface CartItem {
     produk_id: number;
     pelanggan_id: number;
     produk: Produk;
-    quantity:number;
-
+    quantity: number;
 }
 
 interface Props extends PageProps {
     cartItems: CartItem[];
-    user: any;
 }
 
-export default function Index({ cartItems, user }: Props) {
+export default function Index({ cartItems }: Props) {
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [shippingDetails, setShippingDetails] = useState({
         alamat: '',
         kota: '',
@@ -42,14 +40,28 @@ export default function Index({ cartItems, user }: Props) {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        setIsSubmitting(true);
+
+        console.log('Submitting data:', shippingDetails); // Debug log
+
         router.post(route('checkout.process'), {
-            ...shippingDetails,
-            cartItems
+            ...shippingDetails
+        }, {
+            onSuccess: () => {
+                alert('Berhasil Membuat Pesanan')
+                setIsSubmitting(false);
+                router.visit(route('home'));
+            },
+            onError: (errors) => {
+                console.error('Submission errors:', errors); // Debug log
+                setIsSubmitting(false);
+                alert('Terjadi kesalahan saat memproses pesanan');
+            }
         });
     };
 
     const totalHarga = cartItems.reduce((total, item) =>
-         { return total + item.produk.harga_produk * item.quantity}, 0);
+        total + item.produk.harga_produk * item.quantity, 0);
 
     return (
         <div>
@@ -75,6 +87,7 @@ export default function Index({ cartItems, user }: Props) {
                                         onChange={handleInputChange}
                                         className="w-full rounded-md border p-2 text-black"
                                         required
+                                        placeholder='Alamat'
                                     />
                                 </div>
 
@@ -89,6 +102,7 @@ export default function Index({ cartItems, user }: Props) {
                                         onChange={handleInputChange}
                                         className="w-full rounded-md border p-2  text-black"
                                         required
+                                        placeholder='Kota'
                                     />
                                 </div>
 
@@ -103,6 +117,7 @@ export default function Index({ cartItems, user }: Props) {
                                         onChange={handleInputChange}
                                         className="w-full rounded-md border p-2  text-black"
                                         required
+                                        placeholder='Kode Pos'
                                     />
                                 </div>
 
@@ -117,14 +132,16 @@ export default function Index({ cartItems, user }: Props) {
                                         onChange={handleInputChange}
                                         className="w-full rounded-md border p-2  text-black "
                                         required
+                                        placeholder='Nomor Telepon'
                                     />
                                 </div>
 
                                 <button
                                     type="submit"
-                                    className="w-full rounded-full bg-teal-800 px-6 py-3 text-white transition duration-200 hover:bg-teal-700"
+                                    disabled={isSubmitting}
+                                    className="w-full rounded-full bg-teal-800 px-6 py-3 text-white transition duration-200 hover:bg-teal-700 disabled:opacity-50"
                                 >
-                                    Proses Pesanan
+                                    {isSubmitting ? 'Memproses...' : 'Proses Pesanan'}
                                 </button>
                             </form>
                         </div>
@@ -152,7 +169,6 @@ export default function Index({ cartItems, user }: Props) {
                                                     Rp {item.produk.harga_produk.toLocaleString('id-ID')}
                                                 </p>
                                             </div>
-
                                         </div>
                                         <h1 className='text-black'>X {item.quantity}</h1>
                                     </div>
