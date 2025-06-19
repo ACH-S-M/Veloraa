@@ -21,7 +21,7 @@ export function Kategori({IKategori}:TypeBarangKategori)   {
                 <h1 className="mb-4 text-3xl font-bold text-black">Kategori</h1>
 
                 {/* Filter Button */}
-                <div className="mb-8 flex flex-wrap gap-3">
+                <div className="mb-8 flex flex-wrap gap-3 ">
                       {KategoriNav.map((item, index) =>
                             <ButtonKategori key={index} title={item}></ButtonKategori>
                     )}

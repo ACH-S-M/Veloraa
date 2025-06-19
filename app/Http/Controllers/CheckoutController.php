@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Keranjang;
 use App\Models\Pesanan;
 use App\Models\DetailPesanan;
+use App\Models\Pelanggan;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
@@ -17,13 +18,15 @@ class CheckoutController extends Controller
     {
         $user = Auth::user();
 
-        // Get cart items for the authenticated user
+        // Ambil keranjang dari Pelanggan yang udah authentikasi
         $cartItems = Keranjang::with('produk')
             ->where('pelanggan_id', $user->id)
             ->get();
-
+        $alamat = Pelanggan::where('id',$user->id)->value('alamat');
         return Inertia::render('Checkout/Index', [
-            'cartItems' => $cartItems
+            'cartItems' => $cartItems,
+            'alamat' => $alamat,
+
         ]);
     }
 

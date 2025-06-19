@@ -24,7 +24,7 @@ interface Props extends PageProps {
 }
 
 export default function Index({ cartItems }: Props) {
-    const [quantities, setQuantities] = useState<Record<number, number>>(() => { //constanta quantiti adalah state dengan generic class number number
+    const [quantities, setQuantities] = useState<Record<number, number>>(() => { //constanta quantity adalah state dengan generic class number number
        //inisiasi jumlah kuantity awal (1)
         const initialQuantities: Record<number, number> = {};
         cartItems.forEach((item) => {

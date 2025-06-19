@@ -13,8 +13,13 @@ export function AppSidebar() {
         },
         {
 
-            title:"Penjualan",
+            title:"Produk",
             href:"/admin/produk",
+            icon:ShoppingCart,
+        },
+        {
+            title:"Pesanan",
+            href:route("admin.pesanan"),
             icon:ShoppingCart,
         },
 

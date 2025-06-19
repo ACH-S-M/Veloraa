@@ -15,20 +15,26 @@ export default function Component() {
           />
         </div>
        </Link>
-        <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
+       <Link href="/youtube.com">
+       <div className="flex h-full items-center justify-center bg-gray-500 dark:bg-gray-700 dark:text-white">
+
           <img
             src="img/banner2.png"
             alt="kucing"
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
+       </Link>
+       <Link href="/youtube.com">
+       <div className="flex h-full items-center justify-center bg-gray-500 dark:bg-gray-700 dark:text-white">
+
           <img
             src="img/banner3.png"
             alt="kucing"
             className="w-full h-full object-cover"
           />
         </div>
+       </Link>
       </Carousel>
     </div>
   );

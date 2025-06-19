@@ -87,7 +87,7 @@ export default function Index({ cartItems }: Props) {
                                         onChange={handleInputChange}
                                         className="w-full rounded-md border p-2 text-black"
                                         required
-                                        placeholder='Alamat'
+                                        placeholder="alamat"
                                     />
                                 </div>
 

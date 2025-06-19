@@ -10,7 +10,7 @@ export function Produk({ IKategori }: TypeBarangKategori) {
                 <Link
                     key={item.ID_Produk}
                     href={`/detail/${item.ID_Produk}`}
-                    className="block overflow-hidden rounded-xl bg-gray-100 shadow transition-shadow hover:shadow-md" >
+                    className="block overflow-hidden rounded-xl bg-gray-100 shadow transition-shadow hover:shadow-xl hover:scale-105" >
                     <div className="overflow-hidden rounded-xl bg-gray-100 shadow">
                         {item.gambar_produk ? (
                                 <img
