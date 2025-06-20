@@ -8,21 +8,23 @@ class DetailPesanan extends Model
 {
     protected $table = 'detail_pesanan';
     public $timestamps = false;
+    public $incrementing = false;
 
     protected $fillable = [
-        'pesanan_id',
-        'produk_id',
-        'jumlah',
-        'harga'
+        'No_pesanan',
+        'ID_produk',
+        'total_barang'
     ];
+
+    protected $primaryKey = null;
 
     public function pesanan()
     {
-        return $this->belongsTo(Pesanan::class, 'pesanan_id', 'No_pesanan');
+        return $this->belongsTo(Pesanan::class, 'No_pesanan', 'No_pesanan');
     }
 
     public function produk()
     {
-        return $this->belongsTo(ProdukModel::class, 'produk_id', 'ID_Produk');
+        return $this->belongsTo(ProdukModel::class, 'ID_produk', 'ID_Produk');
     }
 }

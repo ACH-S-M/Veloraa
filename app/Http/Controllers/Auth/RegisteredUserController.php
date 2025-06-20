@@ -32,7 +32,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
+            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,  //validase dulu
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'alamat' => 'required|string|max:255',
             'no_telp' => 'required|string|max:20',
@@ -41,14 +41,14 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make($request->password),   // ini bikin ke user
         ]);
 
         // Create pelanggan record for the new user
         $user->pelanggan()->create([
             'id' => $user->id,
-            'alamat' => $request->alamat,
-            'no_telp' => $request->no_telp,
+            'alamat' => $request->alamat,    // Use request data instead of user object
+            'no_telp' => $request->no_telp,  // Use request data instead of user object
         ]);
 
         event(new Registered($user));

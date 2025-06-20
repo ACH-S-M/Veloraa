@@ -18,6 +18,8 @@ Route::get('/', [ProdukController::class,'getBarang'])->name('home'); // ini hom
     Route::get('/admin',[AdminController::class,'index'])->name('admin.dashboard');
     Route::get('/admin/produk',[laporanProduk::class,'index']);
     Route::post('admin/produk', [ProdukController::class, 'store'])->name('produk.store');
+    Route::put('admin/produk/{id}', [ProdukController::class, 'update'])->name('produk.update');
+    Route::delete('admin/produk/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
     Route::get('/admin/pesanan',[pesananController::class,'Index'])->name('admin.pesanan');
  });
 
@@ -33,6 +35,7 @@ Route::get('/keranjang-guest',[keranjangNotLogin::class,'index'])->name('keranja
 Route::middleware(['auth'])->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
     Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
+    Route::get('/user/laporan-pembelian', [CheckoutController::class, 'laporanPembelian'])->name('user.laporanPembelian');
 });
 
 require __DIR__.'/settings.php';

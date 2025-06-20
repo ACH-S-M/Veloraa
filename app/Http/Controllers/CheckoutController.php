@@ -22,11 +22,16 @@ class CheckoutController extends Controller
         $cartItems = Keranjang::with('produk')
             ->where('pelanggan_id', $user->id)
             ->get();
-        $alamat = Pelanggan::where('id',$user->id)->value('alamat');
+
+        // Ambil data alamat dan no_telp dari tabel pelanggan
+        $pelanggan = Pelanggan::where('id', $user->id)->first();
+        $alamat = $pelanggan ? $pelanggan->alamat : '';
+        $no_telp = $pelanggan ? $pelanggan->no_telp : '';
+
         return Inertia::render('Checkout/Index', [
             'cartItems' => $cartItems,
             'alamat' => $alamat,
-
+            'no_telp' => $no_telp,
         ]);
     }
 
@@ -72,11 +77,18 @@ class CheckoutController extends Controller
             // Create order details
             foreach ($cartItems as $item) {
                 $detail = new DetailPesanan();
-                $detail->pesanan_id = $pesanan->No_pesanan;
-                $detail->produk_id = $item->produk_id;
-                $detail->jumlah = $item->quantity;
-                $detail->harga = $item->produk->harga_produk;
+                $detail->No_pesanan = $pesanan->No_pesanan;
+                $detail->ID_produk = $item->produk_id;
+                $detail->total_barang = $item->quantity;
                 $detail->save();
+
+                // Update stok dan barang_terjual produk
+                $produk = \App\Models\ProdukModel::find($item->produk_id);
+                if ($produk) {
+                    $produk->stok = max(0, $produk->stok - $item->quantity); // pastikan stok tidak minus
+                    $produk->barang_terjual = ($produk->barang_terjual ?? 0) + $item->quantity;
+                    $produk->save();
+                }
             }
 
             // Clear cart
@@ -93,5 +105,45 @@ class CheckoutController extends Controller
             ]);
             return back()->with('error', 'Terjadi kesalahan saat membuat pesanan: ' . $e->getMessage());
         }
+    }
+
+    public function laporanPembelian()
+    {
+        $user = Auth::user();
+        $pesanan = \App\Models\Pesanan::where('pelanggan_id', $user->id)
+            ->orderByDesc('tanggal_pemesanan')
+            ->with(['details.produk'])
+            ->first();
+
+        if ($pesanan) {
+            $details = $pesanan->details->map(function ($detail) {
+                return [
+                    'produk' => [
+                        'nama_produk' => $detail->produk->nama_produk,
+                        'harga_produk' => $detail->produk->harga_produk,
+                        'gambar_produk' => $detail->produk->gambar_produk,
+                    ],
+                    'jumlah' => $detail->total_barang,
+                    'harga' => $detail->produk->harga_produk,
+                ];
+            });
+            $pesananData = [
+                'No_pesanan' => $pesanan->No_pesanan,
+                'tanggal_pemesanan' => $pesanan->tanggal_pemesanan,
+                'total_harga' => $pesanan->total_harga,
+                'status' => $pesanan->status,
+                'alamat_pengiriman' => $pesanan->alamat_pengiriman,
+                'kota' => $pesanan->kota,
+                'kode_pos' => $pesanan->kode_pos,
+                'nomor_telepon' => $pesanan->nomor_telepon,
+                'details' => $details,
+            ];
+        } else {
+            $pesananData = null;
+        }
+
+        return Inertia::render('user/laporanPembelian', [
+            'pesanan' => $pesananData
+        ]);
     }
 }

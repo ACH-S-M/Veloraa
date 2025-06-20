@@ -40,6 +40,7 @@ export default function TambahBarang() {
                                 <div className="mb-3">
                                     <label className="block mb-1 text-sm">Nama Produk</label>
                                     <input type="text" className="w-full border px-3 py-2 rounded"
+                                           placeholder='Nama'
                                            value={data.nama}
                                            onChange={e => setData('nama', e.target.value)} />
                                     {errors.nama && <div className="text-sm text-red-600">{errors.nama}</div>}

@@ -15,14 +15,14 @@ class KeranjangController extends Controller
         try {
             $pelanggan_id = Auth::id();
 
-            // Check if product already exists in cart
+            // cek dulu apa di keranjang ada atau tidak
             $existingCart = Keranjang::where([
                 'produk_id' => $id,
                 'pelanggan_id' => $pelanggan_id
             ])->first();
 
             if ($existingCart) {
-                // If product exists, increment quantity
+                // If prouk di keranjang udah ada , kuantitasnya jadi nambah +1
                 $existingCart->quantity += 1;
                 $existingCart->save();
 
@@ -38,9 +38,6 @@ class KeranjangController extends Controller
                 'quantity' => 1
             ]);
 
-            return response()->json([
-                'message' => 'Produk berhasil ditambahkan ke keranjang'
-            ]);
 
         } catch (\Exception $e) {
             return response()->json([

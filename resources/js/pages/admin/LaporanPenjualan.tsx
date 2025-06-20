@@ -2,11 +2,21 @@ import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout-admin';
 import { Head, useForm } from '@inertiajs/react';
 import { useState, FormEvent, ChangeEvent } from 'react';
-import { ProdukProps} from '@/types';
+import { ProdukProps, Produk } from '@/types';
 export default function TambahBarang({ Produk} : ProdukProps) {
     const [showModal, setShowModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [editData, setEditData] = useState<Produk | null>(null);
 
     const { data, setData, post, processing, errors, reset } = useForm({
+        nama: '',
+        harga: '',
+        deskripsi: '',
+        stok: '',
+        gambar: null as File | null,
+    });
+
+    const editForm = useForm({
         nama: '',
         harga: '',
         deskripsi: '',
@@ -22,6 +32,40 @@ export default function TambahBarang({ Produk} : ProdukProps) {
                 reset();
             }
         });
+    };
+
+    const handleEdit = (item: Produk) => {
+        setEditData(item);
+        editForm.setData('nama', item.nama_produk ?? '');
+        editForm.setData('harga', String(item.harga_produk ?? ''));
+        editForm.setData('deskripsi', item.deskripsi_produk ?? '');
+        editForm.setData('stok', String(item.stok ?? ''));
+        editForm.setData('gambar', null);
+        setShowEditModal(true);
+    };
+
+    const handleEditSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (!editData) return;
+        editForm.put(route('produk.update', editData.ID_Produk), {
+            method: 'post',
+            forceFormData: true,
+            onSuccess: () => {
+                setShowEditModal(false);
+                setEditData(null);
+                editForm.reset();
+            },
+        });
+    };
+
+    const handleDelete = (id: number) => {
+        if (window.confirm('Yakin ingin menghapus produk ini?')) {
+            editForm.delete(route('produk.destroy', id), {
+                onSuccess: () => {
+                    // Optionally refresh or show notification
+                },
+            });
+        }
     };
 
     return (
@@ -152,10 +196,11 @@ export default function TambahBarang({ Produk} : ProdukProps) {
                             <th className="px-4 py-4 text-left font-semibold">Stok</th>
                             <th className="px-4 py-4 text-left font-semibold">Deskripsi</th>
                             <th className="px-4 py-4 text-left font-semibold">Jumlah Terjual</th>
+                            <th className="px-4 py-4 text-left font-semibold">Aksi</th>
                         </tr>
                     </thead>
                   {Produk.map((item) => (
-                          <tbody className="bg-amber-50 text-gray-800">
+                          <tbody className="bg-amber-50 text-gray-800" key={item.ID_Produk}>
                           <tr className="border-b border-gray-100 transition-colors hover:bg-[#E5F1FA]">
                               <td className="px-4 py-4 font-medium text-black">{item.ID_Produk}</td>
                               <td className="px-4 py-4 text-black">{item.nama_produk}</td>
@@ -163,11 +208,114 @@ export default function TambahBarang({ Produk} : ProdukProps) {
                               <td className="px-4 py-4">{item.stok}</td>
                               <td className="px-4 py-4">{item.deskripsi_produk}</td>
                               <td className="px-4 py-4">{item.barang_terjual}</td>
-
+                              <td className="px-4 py-4 flex gap-2">
+                                  <Button size="sm" className="bg-yellow-500 text-white" onClick={() => handleEdit(item)}>
+                                      Edit
+                                  </Button>
+                                  <Button size="sm" className="bg-red-600 text-white" onClick={() => handleDelete(item.ID_Produk)}>
+                                      Hapus
+                                  </Button>
+                              </td>
                           </tr>
                       </tbody>
                   ))}
                 </table>
+
+                {/* Modal Edit Produk */}
+                {showEditModal && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+                        <div className="bg-white p-6 rounded-xl shadow-xl w-full max-w-md">
+                            <h2 className="text-xl font-bold mb-4 text-black">Edit Produk</h2>
+                            <form onSubmit={handleEditSubmit} encType="multipart/form-data">
+                                <div className="mb-3">
+                                    <label htmlFor="edit-nama" className="block text-sm font-medium text-gray-700 mb-1">
+                                        Nama Produk
+                                    </label>
+                                    <input
+                                        id="edit-nama"
+                                        type="text"
+                                        className="w-full border mb-3 p-2 rounded text-black"
+                                        value={editForm.data.nama}
+                                        onChange={(e: ChangeEvent<HTMLInputElement>) => editForm.setData('nama', e.target.value)}
+                                    />
+                                    {editForm.errors.nama && <div className="text-sm text-red-600">{editForm.errors.nama}</div>}
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="edit-harga" className="block text-sm font-medium text-gray-700 mb-1">
+                                        Harga
+                                    </label>
+                                    <input
+                                        id="edit-harga"
+                                        type="number"
+                                        className="w-full border mb-3 p-2 rounded text-black"
+                                        value={editForm.data.harga}
+                                        onChange={(e: ChangeEvent<HTMLInputElement>) => editForm.setData('harga', e.target.value)}
+                                    />
+                                    {editForm.errors.harga && <div className="text-sm text-red-600">{editForm.errors.harga}</div>}
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="edit-stok" className="block text-sm font-medium text-gray-700 mb-1">
+                                        Stok
+                                    </label>
+                                    <input
+                                        id="edit-stok"
+                                        type="number"
+                                        className="w-full border mb-3 p-2 rounded text-black"
+                                        value={editForm.data.stok}
+                                        onChange={(e: ChangeEvent<HTMLInputElement>) => editForm.setData('stok', e.target.value)}
+                                        min="0"
+                                    />
+                                    {editForm.errors.stok && <div className="text-sm text-red-600">{editForm.errors.stok}</div>}
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="edit-deskripsi" className="block text-sm font-medium text-gray-700 mb-1">
+                                        Deskripsi
+                                    </label>
+                                    <textarea
+                                        id="edit-deskripsi"
+                                        className="w-full border mb-3 p-2 rounded text-black"
+                                        value={editForm.data.deskripsi}
+                                        onChange={(e: ChangeEvent<HTMLTextAreaElement>) => editForm.setData('deskripsi', e.target.value)}
+                                        rows={4}
+                                    />
+                                    {editForm.errors.deskripsi && <div className="text-sm text-red-600">{editForm.errors.deskripsi}</div>}
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="edit-gambar" className="block text-sm font-medium text-gray-700 mb-1">
+                                        Ganti Gambar Produk (opsional)
+                                    </label>
+                                    <input
+                                        id="edit-gambar"
+                                        type="file"
+                                        className="w-full border mb-3 p-2 rounded text-black"
+                                        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                            if (e.target.files && e.target.files[0]) {
+                                                editForm.setData('gambar', e.target.files[0]);
+                                            }
+                                        }}
+                                    />
+                                    {editForm.errors.gambar && <div className="text-sm text-red-600">{editForm.errors.gambar}</div>}
+                                </div>
+                                <div className="flex justify-end gap-2">
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowEditModal(false)}
+                                        className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                                    >
+                                        Batal
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        className="px-4 py-2 bg-[#5A94C1] text-white rounded hover:bg-[#417aa1]"
+                                        disabled={editForm.processing}
+                                    >
+                                        {editForm.processing ? 'Menyimpan...' : 'Simpan Perubahan'}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                )}
             </div>
         </AppLayout>
     );

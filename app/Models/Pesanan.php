@@ -17,7 +17,8 @@ class Pesanan extends Model
         'alamat_pengiriman',
         'kota',
         'kode_pos',
-        'nomor_telepon'
+        'nomor_telepon',
+        'tanggal_pemesanan'
     ];
 
     public function pelanggan()
@@ -25,8 +26,8 @@ class Pesanan extends Model
         return $this->belongsTo(User::class, 'pelanggan_id');
     }
 
-    public function detailPesanan()
+    public function details()
     {
-        return $this->hasMany(DetailPesanan::class, 'pesanan_id', 'No_pesanan');
+        return $this->hasMany(DetailPesanan::class, 'No_pesanan', 'No_pesanan');
     }
 }

@@ -19,15 +19,17 @@ interface CartItem {
 
 interface Props extends PageProps {
     cartItems: CartItem[];
+    alamat: string;
+    no_telp: string;
 }
 
-export default function Index({ cartItems }: Props) {
+export default function Index({ cartItems, alamat, no_telp }: Props) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [shippingDetails, setShippingDetails] = useState({
-        alamat: '',
+        alamat: alamat || '',
         kota: '',
         kode_pos: '',
-        nomor_telepon: '',
+        nomor_telepon: no_telp || '',
     });
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,7 +52,7 @@ export default function Index({ cartItems }: Props) {
             onSuccess: () => {
                 alert('Berhasil Membuat Pesanan')
                 setIsSubmitting(false);
-                router.visit(route('home'));
+                router.visit(route('user.laporanPembelian'));
             },
             onError: (errors) => {
                 console.error('Submission errors:', errors); // Debug log
@@ -87,7 +89,7 @@ export default function Index({ cartItems }: Props) {
                                         onChange={handleInputChange}
                                         className="w-full rounded-md border p-2 text-black"
                                         required
-                                        placeholder="alamat"
+                                        placeholder={alamat || "Masukkan alamat lengkap"}
                                     />
                                 </div>
 
@@ -132,7 +134,7 @@ export default function Index({ cartItems }: Props) {
                                         onChange={handleInputChange}
                                         className="w-full rounded-md border p-2  text-black "
                                         required
-                                        placeholder='Nomor Telepon'
+                                        placeholder={no_telp || 'Masukkan nomor telepon'}
                                     />
                                 </div>
 

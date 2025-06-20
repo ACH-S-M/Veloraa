@@ -1,9 +1,11 @@
 import { type BigPopuler } from '@/types';
 import { ShoppingCart } from 'lucide-react';
+import { Link } from '@inertiajs/react';
 
 export function Card_PopulerBig({ Produk }: BigPopuler) {
     return (
         <>
+         <Link href={`/detail/${Produk.ID_Produk}`}>
             <div className="w-11/12 overflow-hidden bg-[#f5f5f5] shadow-2xl hover:scale-105">
                 <div className="w-auto bg-gradient-to-br from-blue-400 to-blue-600  text-center">
                         {Produk.gambar_produk ? (
@@ -29,6 +31,7 @@ export function Card_PopulerBig({ Produk }: BigPopuler) {
                     </div>
                 </div>
             </div>
+        </Link>
         </>
     );
 }

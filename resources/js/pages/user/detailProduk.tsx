@@ -15,7 +15,7 @@ export default function DetailProduk({
     const { auth} = usePage<PageProps>().props;
 
     const handleAddToCart = () => {
-        router.post(route('keranjang.add', ID_Produk), {}, {
+        router.post(route('keranjang.add', ID_Produk), {}, { //nambahin produk ke kerangan dengan route keranjang.add Parameternya ID_produk
             preserveScroll: true,
             onSuccess: () => {
                 if (auth.user) {

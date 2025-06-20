@@ -13,6 +13,7 @@ class ProdukModel extends Model
          'harga_produk',
          'stok',
          'deskripsi_produk',
-         'gambar_produk'
+         'gambar_produk',
+         'barang_terjual'
     ];
 }
