@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout-admin';
 import { Head, useForm } from '@inertiajs/react';
+import { Inertia } from '@inertiajs/inertia';
 import { useState, FormEvent, ChangeEvent } from 'react';
 import { ProdukProps, Produk } from '@/types';
 export default function TambahBarang({ Produk} : ProdukProps) {
@@ -47,8 +48,15 @@ export default function TambahBarang({ Produk} : ProdukProps) {
     const handleEditSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!editData) return;
-        editForm.put(route('produk.update', editData.ID_Produk), {
-            method: 'post',
+
+        const updateData: Partial<typeof editForm.data> = {};
+        if (editForm.data.nama) updateData.nama = editForm.data.nama;
+        if (editForm.data.harga) updateData.harga = editForm.data.harga;
+        if (editForm.data.stok) updateData.stok = editForm.data.stok;
+        if (editForm.data.deskripsi) updateData.deskripsi = editForm.data.deskripsi;
+        if (editForm.data.gambar) updateData.gambar = editForm.data.gambar;
+
+        Inertia.put(route('produk.update', editData.ID_Produk), updateData, {
             forceFormData: true,
             onSuccess: () => {
                 setShowEditModal(false);

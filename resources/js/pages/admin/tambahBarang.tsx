@@ -13,7 +13,7 @@ export default function TambahBarang() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route('produk.store'), {
+        post(route('produk.store'), { //submit kirim ke controller produk.store
             onSuccess: () => {
                 setShowModal(false);
                 reset(); // reset form
@@ -50,6 +50,7 @@ export default function TambahBarang() {
                                     <label className="block mb-1 text-sm">Harga</label>
                                     <input type="number" className="w-full border px-3 py-2 rounded"
                                            value={data.harga}
+                                           placeholder='Harga'
                                            onChange={e => setData('harga', e.target.value)} />
                                     {errors.harga && <div className="text-sm text-red-600">{errors.harga}</div>}
                                 </div>

@@ -24,7 +24,7 @@ export function Card_PopulerBig({ Produk }: BigPopuler) {
                 <div className="p-4">
                     <h3 className="mb-2 font-semibold text-gray-800">{Produk.nama_produk}</h3>
                     <div className="flex items-center justify-between">
-                        <p className="mb-4 text-xl font-bold text-gray-800"></p>
+                        <p className="mb-4 text-xl font-bold text-gray-800">{Produk.harga_produk}</p>
                         <button className="mt-3 flex w-1/5 items-center gap-1 rounded-md bg-blue-500 p-3 px-4 py-2 text-white transition-colors hover:bg-blue-600">
                             <ShoppingCart></ShoppingCart>Beli
                         </button>

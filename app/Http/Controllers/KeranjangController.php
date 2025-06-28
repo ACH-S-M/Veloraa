@@ -34,14 +34,14 @@ class KeranjangController extends Controller
             // Add to cart with quantity 1
             Keranjang::create([
                 'produk_id' => $id,
-                'pelanggan_id' => $pelanggan_id,
+                'pelanggan_id' => $pelanggan_id, //kalo misal gaada barang, nanti nmmbah insert data di db, bakal direturn ke card ama inertia
                 'quantity' => 1
             ]);
 
 
-        } catch (\Exception $e) {
+        } catch (\Exception $e) { //pengecualian kalo gagal
             return response()->json([
-                'message' => $e->getMessage()
+                'message' => $e->getMessage() //lempar json pesan dari $e /error/ pengecualian
             ], 500);
         }
     }
@@ -49,16 +49,16 @@ class KeranjangController extends Controller
     public function index()
     {
         if (!Auth::check()) {
-            return redirect()->route('login');
+            return redirect()->route('login'); //kalo blm login dia bakal lempar ke /login
         }
 
         $pelanggan_id = Auth::id();
         $cartItems = Keranjang::with('produk')
             ->where('pelanggan_id', $pelanggan_id)
-            ->get();
+            ->get(); //ambil forein key produk di keranjang
 
         return Inertia::render('Keranjang/Index', [
-            'cartItems' => $cartItems
+            'cartItems' => $cartItems //mengembalikan page keranjang
         ]);
     }
 
