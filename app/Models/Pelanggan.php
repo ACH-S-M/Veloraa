@@ -15,6 +15,8 @@ class Pelanggan extends Authenticatable
     protected $fillable = [
         'id',
         'alamat',
+        'kota',
+        'kode_pos',
         'no_telp'
     ];
 

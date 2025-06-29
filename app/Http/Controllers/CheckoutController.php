@@ -27,11 +27,15 @@ class CheckoutController extends Controller
         $pelanggan = Pelanggan::where('id', $user->id)->first();
         $alamat = $pelanggan ? $pelanggan->alamat : '';
         $no_telp = $pelanggan ? $pelanggan->no_telp : '';
+        $kota = $pelanggan ? $pelanggan->kota : '';
+        $kode_pos = $pelanggan ? $pelanggan->kode_pos : '';
 
         return Inertia::render('Checkout/Index', [
             'cartItems' => $cartItems,
             'alamat' => $alamat,
             'no_telp' => $no_telp,
+            'kota' => $kota,
+            'kode_pos' => $kode_pos
         ]);
     }
 

@@ -21,14 +21,16 @@ interface Props extends PageProps {
     cartItems: CartItem[];
     alamat: string;
     no_telp: string;
+    kota:string;
+    kode_pos:string;
 }
 
-export default function Index({ cartItems, alamat, no_telp }: Props) {
+export default function Index({ cartItems, alamat, no_telp,kota,kode_pos }: Props) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [shippingDetails, setShippingDetails] = useState({
         alamat: alamat || '',
-        kota: '',
-        kode_pos: '',
+        kota: kota || '',
+        kode_pos: kode_pos || '',
         nomor_telepon: no_telp || '',
     });
 

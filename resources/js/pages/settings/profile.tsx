@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Navbaruser } from '@/components-user/navbar-user';
-
+import ProfileLayout from '@/layouts/ProfileLayout';
 
 type ProfileForm = {
     name: string;
@@ -35,6 +35,7 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
         <div>
     <Head title="Profile settings" />
     <Navbaruser />
+        <ProfileLayout>
         <div className="min-h-screen w-full bg-gradient-to-br from-teal-50 to-cyan-50 p-6 pt-36">
             <div className="max-w-4xl mx-auto space-y-8">
                 {/* Header Section */}
@@ -229,6 +230,7 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                 <DeleteUser />
             </div>
         </div>
-</div>
+        </ProfileLayout>
+        </div>
     );
 }
