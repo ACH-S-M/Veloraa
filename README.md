@@ -5,5 +5,5 @@
 3. Jalankan `npm install`
 4. Copy `.env.example` ke `.env`
 5. Jalankan `php artisan key:generate`
-6. (Opsional) `php artisan migrate`
+6  Ambil database dari file migrasi yang saya buat `php artisan migrate`
 7. Jalankan `php artisan serve` dan `npm run dev`
