@@ -9,7 +9,8 @@
 7. Jalankan `php artisan serve` dan `npm run dev`
 8. Kalo Projectnya Blank, itu artinya belum ada Barang yang ditambahkan, login sebagai admin untuk Menambah produk terlebih dahulu.
 9. Solusi kalo Project awal di buka itu blank, ambil seeder data Admin dulu caranya  php artisan db:seed
-10. Setelah itu masuk dengan email : admin@gmail.com dan password : admin123
-11. di admin, silahkan untuk tambah barang
-12. setelah tambah barang, coba lah untuk register sebagai pelanggan dan coba untuk memesan beberapa produk.
-13. 
+10. cara Login nya, Akses url tambahan yaitu /login dari yg awalnya localhost:8000 jadi localhost:8000/login , pastikan sudah ambil data seeder
+11. Setelah itu masuk dengan email : admin@gmail.com dan password : admin123
+12. di admin, silahkan untuk tambah barang
+13. setelah tambah barang, coba lah untuk register sebagai pelanggan dan coba untuk memesan beberapa produk.
+14. 
