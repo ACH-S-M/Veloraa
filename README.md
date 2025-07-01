@@ -13,4 +13,5 @@
 11. Setelah itu masuk dengan email : admin@gmail.com dan password : admin123
 12. di admin, silahkan untuk tambah barang
 13. setelah tambah barang, coba lah untuk register sebagai pelanggan dan coba untuk memesan beberapa produk.
-14. 
+14. Coba edit profile dulu untuk alamat yang otomatis masuk ke checkout tanpa perlu untuk mengetikan manual, jika belum update alamat maka sistem yang default cuma isi no Hp sama alamat saja
+    
