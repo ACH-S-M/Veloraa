@@ -5,7 +5,8 @@
 3. Jalankan `npm install`
 4. Copy `.env.example` ke `.env`   cp .env.example .env
 5. Jalankan `php artisan key:generate`
-6  Ambil database dari file migrasi yang saya buat `php artisan migrate`
+6. Setting dulu database nya di env. sesuaikan terlebih dahulu
+6  jika sudah ambil database dari file migrasi yang saya buat `php artisan migrate`
 7. Jalankan `php artisan serve` dan `npm run dev`
 8. Kalo Projectnya Blank, itu artinya belum ada Barang yang ditambahkan, login sebagai admin untuk Menambah produk terlebih dahulu.
 9. Solusi kalo Project awal di buka itu blank, ambil seeder data Admin dulu caranya  php artisan db:seed
