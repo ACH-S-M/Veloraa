@@ -12,6 +12,11 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-
+        \App\Models\User::create([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('admin123'),
+            'role' => 'Admin',
+        ]);
     }
 }

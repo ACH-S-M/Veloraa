@@ -16,6 +16,8 @@ return new class extends Migration
             $table->id();
             $table->string('alamat');
             $table->string('no_telp');
+            $table->string('kota')->nullable();
+            $table->string('kode_pos')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->foreign('id')->references('id')->on('users')->onDelete('cascade');

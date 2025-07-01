@@ -15,7 +15,7 @@ export default function ProfileLayout({children} :Proops){
 
     ]
     return <div>
-            <div className="navprofile flex w-full p-5 gap-7 items-center bg-red-500 pt-32  ">
+            <div className="navprofile flex w-full p-5 gap-7 items-center bg-blue-500 pt-32  ">
                     {Navprofile.map((item) => (
                         <ul>
                             <li className="hover:cursor-pointer"><a href={item.href}>{item.title}</a></li>

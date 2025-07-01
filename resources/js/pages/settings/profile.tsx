@@ -171,7 +171,7 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                             <div className="flex items-center gap-4">
                                 <Button
                                     disabled={processing}
-                                    className="px-8 py-3 bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                                    className="px-8 py-3 bg-gradient-to-r bg-blue-400 hover:from-teal-700 hover:to-teal-800 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                                 >
                                     {processing ? (
                                         <div className="flex items-center">
@@ -186,7 +186,7 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                                             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                                             </svg>
-                                            Save Changes
+                                            Simpan Perubahan
                                         </div>
                                     )}
                                 </Button>

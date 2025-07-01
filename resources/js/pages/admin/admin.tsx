@@ -3,10 +3,10 @@ import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 interface Props {
     Penjualan: number;
-    UangPenjualan:number;
-    stok:number;
-  }
-export default function AdminNih({Penjualan,UangPenjualan,stok} : Props) {
+    UangPenjualan: number;
+    stok: number;
+}
+export default function AdminNih({ Penjualan, UangPenjualan, stok }: Props) {
     const breadcrumbs: BreadcrumbItem[] = [
         {
             href: '/dashboard',
@@ -27,7 +27,13 @@ export default function AdminNih({Penjualan,UangPenjualan,stok} : Props) {
                                 </div>
                                 <div className="text-right">
                                     <div className="text-sm text-gray-500">Hari ini</div>
-                                    <div className="text-2xl font-bold text-[#5A94C1]">15 Juni 2025</div>
+                                    <div className="text-2xl font-bold text-[#5A94C1]">
+                                        {new Date().toLocaleDateString('id-ID', {
+                                            day: 'numeric',
+                                            month: 'long',
+                                            year: 'numeric',
+                                        })}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -53,8 +59,6 @@ export default function AdminNih({Penjualan,UangPenjualan,stok} : Props) {
                                 <div className="mb-2 text-4xl font-bold text-[#5A94C1]">{stok}</div>
                                 <p className="text-gray-500">Tersedia di gudang</p>
                             </div>
-
-                           
                         </div>
                     </div>
                 </div>

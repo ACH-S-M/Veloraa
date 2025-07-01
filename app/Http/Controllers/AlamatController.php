@@ -18,15 +18,15 @@ class AlamatController extends Controller
     {
         $request->validate([
             'alamat' => 'required|string|max:255',
-            'kota' => 'required|string|max:100',
+            'kota' => 'required|string|max:100',    //inputan (fillable)
             'kode_pos' => 'required|string|max:10',
         ]);
 
-        $user = Auth::user();
+        $user = Auth::user(); //ambil auth user
 
         // Update or create pelanggan record
         Pelanggan::updateOrCreate(
-            ['id' => $user->id],
+            ['id' => $user->id],  //foreign key dari user -> id = pelanggan -> id
             [
                 'alamat' => $request->alamat,
                 'kota' => $request->kota,
