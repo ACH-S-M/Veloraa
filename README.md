@@ -7,3 +7,4 @@
 5. Jalankan `php artisan key:generate`
 6  Ambil database dari file migrasi yang saya buat `php artisan migrate`
 7. Jalankan `php artisan serve` dan `npm run dev`
+8. Kalo Projectnya Blank, itu artinya belum ada Barang yang ditambahkan, login sebagai admin untuk Menambah produk terlebih dahulu.
