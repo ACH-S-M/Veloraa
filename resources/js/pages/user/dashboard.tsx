@@ -4,6 +4,7 @@ import {Navbaruser} from '@/components-user/navbar-user';
 import { Popular } from '@/components-user/Layout-popular';
 import {  type TypeProdukPopuler} from '@/types';
 import { type TypeBarangKategori } from '@/types';
+
 import { Kategori } from '@/components-user/kategori';
 
 

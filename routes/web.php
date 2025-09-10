@@ -12,6 +12,7 @@ use App\Http\Controllers\detailController;
 use App\Http\Controllers\admin\laporanProduk;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\admin\pesananController;
+use App\Http\Controllers\Api\ProductApi;
 
 Route::get('/', [ProdukController::class,'getBarang'])->name('home'); // ini home nyaa
  Route::middleware(['auth', 'isAdmin'])->group(function () { //khusus role Admin
@@ -26,7 +27,7 @@ Route::get('/', [ProdukController::class,'getBarang'])->name('home'); // ini hom
 
 Route::middleware(['keranjang','auth'])->group(function(){ //kalo dia udah login baru bisa akses keranjang
     Route::get('/keranjang',[KeranjangController::class,'Index'])->Name('keranjang'); //tampilin keranjng sesuai dengan milik masing masing di db
-    Route::post('/keranjang/{id}', [KeranjangController::class, 'addToCart'])->name('keranjang.add'); //tambahin ke keranjang 
+    Route::post('/keranjang/{id}', [KeranjangController::class, 'addToCart'])->name('keranjang.add'); //tambahin ke keranjang
     Route::delete('/keranjang/{id}', [KeranjangController::class, 'removeFromCart'])->name('keranjang.remove');
     Route::patch('/keranjang/{id}/quantity', [KeranjangController::class, 'updateQuantity'])->name('keranjang.updateQuantity');
 });
@@ -38,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
     Route::get('/user/laporan-pembelian', [CheckoutController::class, 'laporanPembelian'])->name('user.laporanPembelian');
 });
+
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
