@@ -14,7 +14,7 @@ export function Navaccount() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="flex items-center gap-2 px-3 py-2 rounded hover:bg-blue-500 text-white transition" >
+        <button className="flex items-center gap-2 px-3 py-2 rounded  text-black transition" >
           <UserInfo user={auth.user} />
         </button>
       </DropdownMenuTrigger>
