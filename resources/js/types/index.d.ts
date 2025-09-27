@@ -45,6 +45,7 @@ interface PropsProdukPopuler{
     nama_produk:string;
     harga_produk:number;
     gambar_produk:string;
+    stok:number;
 }
 
 interface BigPopuler{

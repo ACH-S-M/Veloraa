@@ -12,9 +12,10 @@ use App\Http\Controllers\detailController;
 use App\Http\Controllers\admin\laporanProduk;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\admin\pesananController;
-use App\Http\Controllers\Api\ProductApi;
+use App\Http\Controllers\pencarianController;
 
 Route::get('/', [ProdukController::class,'getBarang'])->name('home'); // ini home nyaa
+Route::get('/search',[pencarianController::class,'index'])->name('search');
  Route::middleware(['auth', 'isAdmin'])->group(function () { //khusus role Admin
     Route::get('/admin',[AdminController::class,'index'])->name('admin.dashboard'); //role admin bakal ke dashboard
     Route::get('/admin/produk',[laporanProduk::class,'index']); // ambil laporan produk (tbel produk)

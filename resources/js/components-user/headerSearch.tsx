@@ -7,6 +7,12 @@ export function HeaderSearch() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        if (!query.trim()) {
+            console.log('Empty query, not submitting');
+            return; // Don't submit empty queries
+        }
+
+        console.log('Submitting search query:', query);
         setIsSubmitting(true);
 
         router.get(
@@ -14,7 +20,9 @@ export function HeaderSearch() {
             { q: query },
             {
                 onFinish: () => setIsSubmitting(false),
-
+                onSuccess: () => {
+                    console.log('Search successful for query:', query);
+                },
                 onError: (errors) => {
                     console.error('Submission errors:', errors);
                     alert('Terjadi kesalahan saat memproses pencarian');
@@ -33,7 +41,7 @@ export function HeaderSearch() {
                             <line x1="21" y1="21" x2="16.65" y2="16.65" />
                         </svg>
                     ) : (
-                        <svg className="h-4 w-4 text-gray-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <svg className="h-4 w-4 text-gray-700 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <circle cx="11" cy="11" r="6" />
                         </svg>
                     )}
@@ -46,7 +54,8 @@ export function HeaderSearch() {
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Cari barang"
                     aria-label="Cari barang"
-                    className="w-full rounded bg-gray-300 p-1.5 pl-10 text-black"
+                    className="w-full rounded bg-gray-300 p-1.5 pl-10 text-black focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                    disabled={isSubmitting}
                 />
             </div>
         </form>
