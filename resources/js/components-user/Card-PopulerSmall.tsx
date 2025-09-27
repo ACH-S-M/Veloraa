@@ -9,7 +9,17 @@ export function Card_PopulerSmall({ Produk }: TypeProdukPopuler) {
                 <Link href={`/detail/${item.ID_Produk}`}>
                     <div className="max-w-sm overflow-hidden rounded-2xl bg-white shadow-md">
                         {/* Product Image */}
-                        <img src={item.gambar_produk} alt={"ys"} className="h-80 w-full object-cover" />
+                        {item.gambar_produk ? (
+                            <img 
+                                src={item.gambar_produk.startsWith('img/produk/') ? `/${item.gambar_produk}` : `/img/produk/${item.gambar_produk}`}
+                                alt={item.nama_produk}
+                                className="h-80 w-full object-cover" 
+                            />
+                        ) : (
+                            <div className="h-80 w-full bg-gray-200 flex items-center justify-center">
+                                <span className="text-2xl font-bold text-gray-400">No Image</span>
+                            </div>
+                        )}
 
                         {/* Product Details */}
                         <div className="space-y-3 p-4">
